@@ -33,7 +33,10 @@ class Noticia extends Conectar{
 	}
 
 	public function eliminar(){
-		$this->db->exec("DELETE FROM noticias WHERE id = '$this->id'");	
+		$sql = "DELETE FROM noticias WHERE id = :id";
+                $query = $this->db->prepare( $sql );
+		$query->execute(array(':id' => $this->id));
+		return $this;
 	}
 
 	public function listar(){
